@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity() {
         locationRequest.fastestInterval = FASTEST_INTERVAL
 //init location callback
 
-        requestPermission()
-
         btnCalc.setOnClickListener {
             if (validation()) {
                 // input data to worker
@@ -107,6 +105,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnLocation.setOnClickListener {
+            requestPermission()
+        }
         //show result
         stringBuilderLiveData.observe(this, Observer {
             tvCurrentOperations.text = it.toString()
@@ -266,6 +267,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     @SuppressLint("MissingPermission")
     private fun startLocationUpdates() {
         fusedLocationClient.requestLocationUpdates(
